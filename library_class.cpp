@@ -10,7 +10,7 @@ class Library_Member
     public:
         int id;
         string member_type;
-        int books_issued;
+    
     void get_data()
     {
         cout << "Input Name: ";
@@ -21,20 +21,34 @@ class Library_Member
         cin >> id;
         cout << "Input Member Type: ";
         cin >> member_type;
-        cout << "Input Books Issued: ";
-        cin >> books_issued;
     }
 
     void show_details()
     {
         cout << "\nBook Holder Name: " << name;
-        cout << "\nNo of Books Issued:" << books_issued;
     }
+};
 
-    void issue_book()
+class Book
+{
+    private:
+    string book[5];
+    int books_issued;
+
+    public:
+    Book():books_issued(0) { }
+
+     void issue_book()
     { 
-        books_issued++; 
-        cout << "\nBook Issued Successfully";
+        if (books_issued < 5)
+        {
+            cout << "\nInput book name: ";
+            cin >> book[books_issued];
+            books_issued++; 
+            cout << "\nBook Issued Successfully";
+        }
+        else
+        cout << "\nCannot issue more books";
     }
 
     void book_back()
@@ -47,15 +61,13 @@ class Library_Member
         else 
         cout <<"\nNo books to return";
     }
+
 };
 
 int main(int argc , char* argv[])
 {
     Library_Member l;
     l.get_data();
-    l.issue_book();
-    l.issue_book();
-    l.book_back();
     cout << "\n";
     l.show_details();
     return 0;
