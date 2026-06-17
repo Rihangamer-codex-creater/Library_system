@@ -2,31 +2,25 @@
 #include <string>
 using namespace std;
 
-class Library_Member
+class Member_Detail
 {
     private:
         string name;
         int age;
-    public:
-        int id;
-        string member_type;
-    
-    void get_data()
-    {
-        cout << "Input Name: ";
-        cin >> name;
-        cout << "Input Age: ";
-        cin >> age;
-        cout << "Input ID: ";
-        cin >> id;
-        cout << "Input Member Type: ";
-        cin >> member_type;
-    }
 
-    void show_details()
-    {
-        cout << "\nBook Holder Name: " << name;
-    }
+    public:
+        void get_data()
+        {
+            cout << "Input Name: ";
+            cin >> name;
+            cout << "Input Age: ";
+            cin >> age;
+        }
+
+        void display()
+        {
+            cout << "\nBook Holder Name: " << name;
+        }
 };
 
 class Book
@@ -38,13 +32,12 @@ class Book
     public:
     Book():books_issued(0) { }
 
-     void issue_book()
+    void issue_book()
     { 
         if (books_issued < 5)
         {
             cout << "\nInput book name: ";
-            cin >> book[books_issued];
-            books_issued++; 
+            cin >> book[books_issued++];
             cout << "\nBook Issued Successfully";
         }
         else
@@ -62,6 +55,34 @@ class Book
         cout <<"\nNo books to return";
     }
 
+    void display()
+    {
+        cout << "\nNo of Books issued: " << books_issued;
+    }
+};
+
+class Library_Member : public Member_Detail , public Book
+{
+    private:
+    string member_type;
+    int id;
+
+    public:
+    void get_data()
+    {
+        Member_Detail :: get_data();
+        cout << "Input Member Type: ";
+        cin >> member_type;
+        cout << "Input Id: ";
+        cin >> id;
+    }
+
+    void display()
+    {
+        Member_Detail :: display();
+        Book :: display();
+    }
+
 };
 
 int main(int argc , char* argv[])
@@ -69,6 +90,6 @@ int main(int argc , char* argv[])
     Library_Member l;
     l.get_data();
     cout << "\n";
-    l.show_details();
+    l.display();
     return 0;
 }
