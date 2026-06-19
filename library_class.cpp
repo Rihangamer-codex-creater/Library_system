@@ -70,17 +70,20 @@ class Library_Member : public Member_Detail , public Book
     public:
     void get_data()
     {
+        bool temp;
         Member_Detail :: get_data();
-        cout << "Input Member Type: ";
-        cin >> member_type;
+        cout << "Input Member Type (0-Regular and 1-Premium): ";
+        cin >> temp;
         cout << "Input Id: ";
         cin >> id;
+        member_type= (temp ? "Premium" : "Regular");
     }
 
     void display()
     {
         Member_Detail :: display();
         Book :: display();
+        cout<<member_type;
     }
 
 };
@@ -90,6 +93,7 @@ int main(int argc , char* argv[])
     Library_Member l;
     l.get_data();
     cout << "\n";
+    l.issue_book();
     l.display();
     return 0;
 }
